@@ -50,20 +50,37 @@ sampler.addEventListener('click', () => {
 
 const serviceType = document.getElementById('service-type');
 const fileUpload = document.querySelector('.dialog-box');
+const instructions = document.querySelector('.dialog-box h4');
 const inputGroup = document.getElementById('input-group');
 let isApparel = false;
+let isSampler = false;
 
 serviceType.addEventListener('change', () => {
-    if (!isApparel && serviceType.value == 'Apparel') {
-        fileUpload.classList.toggle('collapsed');
+    const serviceValue = serviceType.value;
+
+    if (serviceValue === 'Apparel' && !isApparel) {
+        // Switch to "Apparel" view
+        instructions.innerHTML = 'Upload Vector Files for Apparel';
+        if (!isSampler) fileUpload.classList.remove('collapsed'); // Open if collapsed
         inputGroup.style.height = '600px';
         isApparel = true;
-    } else if (isApparel && serviceType.value != 'Apparel') {
-        fileUpload.classList.toggle('collapsed');
+        isSampler = false;
+    } else if (serviceValue === 'Sampler' && !isSampler) {
+        // Switch to "Sampler" view
+        instructions.innerHTML = 'Upload Video Clips for Sampler';
+        if (!isApparel) fileUpload.classList.remove('collapsed'); // Open if collapsed
+        inputGroup.style.height = '600px';
+        isSampler = true;
+        isApparel = false;
+    } else if (serviceValue !== 'Apparel' && serviceValue !== 'Sampler' && (isApparel || isSampler)) {
+        // Reset to default if neither "Apparel" nor "Sampler" is selected
+        fileUpload.classList.add('collapsed'); // Collapse only when switching away
         inputGroup.style.height = '450px';
         isApparel = false;
+        isSampler = false;
     }
 });
+
 
 const fileInput = document.getElementById('fileInput');
 const fileName = document.getElementById('fileName');

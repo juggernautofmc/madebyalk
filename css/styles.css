@@ -387,17 +387,32 @@ textarea {
     width: 120px;
     height: auto;
     max-height: 40px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
     text-align: center;
 }
 
 #portfolio-title {
     position: relative; 
-    left: 37%;
+    left: 40%;
     text-align: center;
     font-size: 50px;
+}
+
+@media (max-width: 1200px) {
+    #portfolio-title {
+        position: relative; 
+        left: 37%;
+        text-align: center;
+        font-size: 50px;
+    }
+}
+
+@media (max-width: 950px) {
+    #portfolio-title {
+        position: relative; 
+        left: 34%;
+        text-align: center;
+        font-size: 50px;
+    }
 }
 
 .portfolio-entry {

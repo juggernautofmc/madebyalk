@@ -13,12 +13,18 @@ navButton.addEventListener('click', () => {
 
 function createSlider(project, buttonGroup, imageContainer, image) {
     const images = project.images; // Images array from the project
+    let currentIndex = 0; // Keep track of the current image index
   
     // Get all slide buttons for this particular slider
     const slides = buttonGroup.querySelectorAll('li');
   
     function slider(i) {
-      // Ensure we're only updating the image inside this particular container
+      // Ensure index is within bounds
+      if (i < 0) i = images.length - 1; // Wrap around to the last image
+      if (i >= images.length) i = 0; // Wrap around to the first image
+      currentIndex = i; // Update the current index
+  
+      // Update the image inside this particular container
       const currentImage = imageContainer.querySelector('.portfolio-image');
       currentImage.src = images[i]; // Update the image's `src` for the selected slide
   
@@ -34,7 +40,33 @@ function createSlider(project, buttonGroup, imageContainer, image) {
         slider(i); // Show the selected image when button is clicked
       });
     });
+  
+    // Swiping functionality
+    let startX = 0;
+  
+    imageContainer.addEventListener('touchstart', (event) => {
+      startX = event.touches[0].clientX; // Record the starting touch X position
+    });
+  
+    imageContainer.addEventListener('touchmove', (event) => {
+      // Prevent default scrolling behavior during swipe
+      event.preventDefault();
+    });
+  
+    imageContainer.addEventListener('touchend', (event) => {
+      const endX = event.changedTouches[0].clientX; // Record the ending touch X position
+      const diffX = startX - endX;
+  
+      if (Math.abs(diffX) > 150) { // Threshold to prevent accidental swipes
+        if (diffX > 0) {
+          slider(currentIndex + 1); // Swipe left -> next image
+        } else {
+          slider(currentIndex - 1); // Swipe right -> previous image
+        }
+      }
+    });
   }
+  
   
   fetch('portfolios/portfolio_data.json')
     .then(response => {

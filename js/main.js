@@ -68,11 +68,11 @@ img.addEventListener('touchmove', (e) => {
 });
 
 img.addEventListener('touchend', () => {
-    if (startX - endX > 500) {
+    if (startX - endX > 400) {
         // Swipe left (show next slide)
         slider((index) % 3);
         
-    } else if (endX - startX > 500) {
+    } else if (endX - startX > 400) {
         // Swipe right (show previous slide)
         slider(((index - 2) + 3) % 3);
     }
