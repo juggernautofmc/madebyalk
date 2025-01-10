@@ -1,0 +1,452 @@
+@font-face {
+    font-family: 'Heavitas Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: url('../fonts/Heavitas.woff') format('woff');
+    }
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Heavitas Regular', sans-serif;
+    font-weight: 100;
+}
+
+.container {
+    width: 100%;
+    min-width: 900px;
+    margin: auto;
+}
+
+header {
+    position: fixed;
+    background-color: white;
+    box-shadow: 1px 6px 12px black;
+    z-index: 2;
+}
+
+
+.bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+}
+
+.navbutton {
+    position: absolute;
+    left: 0;
+    padding: 48px 48px;
+    border-left: none;
+    border-top: none;
+    border-bottom: none;
+    border-right-style: solid;
+    border-right-width: 4px;
+    border-right-color: black;
+    background-image: url('../images/navbutton.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    z-index: 5;
+    box-shadow: 1px -6.5px 6px black;
+}
+
+.navline {
+    z-index: 3;
+    position: absolute;
+    right: 0;
+    width: 100%;
+    height: 4px;
+    background-color: black;
+    border: none;
+}
+
+#nav {
+    height: 110px;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 0.5rem;
+    text-decoration-thickness: 1px;
+}
+
+.navitems {
+    transition: transform 0.3s ease-in-out;
+    position: absolute;
+    border: solid;
+    border-left: none;
+    border-top: none;
+    border-width: 4px;
+    left: 0;
+    background-color: white;
+    width: 96px;
+    padding-bottom: 0.25rem;
+    z-index: 4;
+}
+
+a {
+    font-size: small;
+    text-align: center;
+    color: black
+}
+
+.hidden {
+    transform: translateY(-100%);
+}
+
+.highlights {
+    position: relative;
+    padding-top: 120px;
+    height: 750px;
+    background-image: url('../images/slide_1.jpg');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position-y: -20px;
+}
+
+.highlights-left {
+    display: flex;
+    flex-direction: column;
+    padding-left: 2.8rem;
+}
+
+hr {
+    border: none;
+    background-color:black;
+    height: 2px;
+    min-width: 900px;
+}
+
+#highlight-text {
+    display: inline-block;
+    font-size: 52px;
+    padding-top: 2rem;
+    text-align: left;
+}
+
+.slider {
+    border: none;
+    width: 15px;
+    height: 15px;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.selected {
+    background-color: black;
+}
+
+#slider-buttons {
+    position: absolute;
+    display: inline-block;
+    left: 95%;
+    bottom: 42%;
+    list-style-type: none;
+    line-height: 35px;
+}
+
+.redirect {
+    border: solid;
+    border-radius: 30px;
+    width: 200px;
+    height: 50px;
+    background-color: black;
+    color: white;
+    border-color: black;
+    font-size: 18px;
+    padding-top: 3px;
+    text-align: center;
+    transition: background 0.5s ease-in;
+    transition: color 0.25s ease-out;
+}
+
+.redirect:hover {
+    background-color: white;
+    color: black;
+    transition: background 0.5s ease-in;
+    transition: color 0.25s ease-out;
+}
+
+#b1 {
+    margin-top: 20px;
+}
+
+#about-me {
+    font-size: 52px;
+    color: white;
+}
+
+#about-me-text {
+    text-align: center;
+    line-height: 25px;
+    position: relative;
+    color: white;
+    width: 40%;
+}
+
+#about-me-photo {
+    width: 50%;
+    height: 60%;
+    padding-top: 2rem;
+}
+
+.secline {
+    min-width: 900px;
+}
+
+.about-me-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#contactme {
+    display: flex;
+    background-image: url('../images/made_by_alk_background.png');
+    background-color: rgba(255,255,255,0.7);
+    background-position-y: -180px;
+    background-blend-mode: lighten;
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center;
+}
+
+#b2 {
+    margin: 2rem;
+}
+
+#form {
+    min-height: 900px; 
+    background-image: url('../images/form_pattern.png');
+    background-size: 50%;
+    background-color: rgba(255,255,255,0.7);
+    background-blend-mode: lighten;
+}
+
+.form-content {
+    padding-top: 140px;
+    padding-left: 3rem;
+    width: 200px;
+    padding-bottom: 100px;
+}
+
+.services {
+    list-style-type: none;
+    width: 100%;
+    border: solid;
+    background-color: white;
+}
+
+.dropdown {
+    margin: 7px;
+    margin-left: 10px;
+    display: inline-block;
+    margin-right: 10px;
+    height: 20px;
+    width: 20px;
+    border: none;
+    background-image: url('../images/arrow.png');
+    background-repeat: no-repeat;
+    background-size: 180% 180%;
+    background-position-x: -7px;
+    background-position-y: -5px;
+    background-color: transparent;
+}
+
+h3 {
+    display: inline-block;
+    padding: 10px;
+}
+
+.form-content {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+}
+
+.services-desc {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    padding: 20px;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    font-size: 15px;
+}
+
+.collapsed {
+    display: none;
+}
+
+.services-list {
+    list-style-type: '- ';
+    font-size: 12px;
+    margin-left: 2rem;
+}
+
+input[type="text"] {
+    width: 160px;
+    height: 40px;
+    padding-left: 15px;
+    padding-top: 2px;
+    padding-right: 15px;
+    border: solid;
+    border-width: 1.5px;
+    outline: none;
+}
+
+#input-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 400px;
+    height: 450px;
+    max-height: 600px;
+}
+
+select {
+    width: 192px;
+    height: 45px;
+    padding-left: 15px;
+    padding-top: 2px;
+    border: solid;
+    border-width: 1.5px;
+    outline: none;
+}
+
+textarea {
+    width: 357px;
+    height: 200px;
+    padding: 15px;
+    border: solid;
+    border-width: 1.5px;
+    outline: none;
+}
+
+/* Dialog Box Styling */
+.dialog-box {
+    width: 347px;
+    padding: 20px;
+    background-color: #ffffff; /* Replace with your dialog's background color */
+    border: 1.5px solid #000;    /* Replace with your dialog's border color */
+    font-family: Arial, sans-serif; /* Ensure consistent font */
+  }
+  
+  /* Heading Styling */
+  .dialog-box h4 {
+    margin-bottom: 20px;
+    color: #000; /* Replace with your dialog's text color */
+  }
+  
+  /* File Input Container */
+  .file-input-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  
+  /* Hide the actual file input */
+  .file-input {
+    display: none;
+  }
+  
+  /* Custom File Button */
+  .custom-file-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #000; /* Replace with your button's background color */
+    color: #fff;                /* Replace with your button's text color */
+    border: solid;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.3s;
+  }
+  
+  /* Button Hover Effect */
+  .custom-file-button:hover {
+    background-color: #fff; /* Darken the button on hover */
+    color: black;
+  }
+  
+  /* Display Selected File Name */
+  .file-name {
+    width: 15px;
+    margin-left: 15px;
+    font-size: 14px;
+    color: #777; /* Replace with your desired text color */
+    flex-grow: 1;
+  }
+
+#fileList {
+    font-size: 10px;
+    right: 0;
+    margin: 0rem 1rem;
+    width: 120px;
+    height: auto;
+    max-height: 40px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: center;
+}
+
+#portfolio-title {
+    position: relative; 
+    left: 37%;
+    text-align: center;
+    font-size: 50px;
+}
+
+.portfolio-entry {
+    margin: 0px 20px;
+}
+
+.portfolio-container {
+    margin: 3rem;
+    margin-bottom: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.portfolio-entry {
+    background-color: black;
+    width: 300px;
+    margin: 20px;
+    padding: 20px;
+}
+
+.image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.portfolio-buttons {
+    list-style-type: none;
+    position: relative;
+    bottom: 50px;
+    margin: 0;
+}
+
+.portfolio-image {
+    width: 300px;
+    margin-bottom: 10px;
+}
+
+.portfolio-text {
+    color: white;
+    margin: 10px 0px;
+}
+
+#portfolio {
+    min-height: 1200px; 
+    padding-top: 135px;
+    background-image: url('../images/form_pattern.png');
+    background-size: 50%;
+    background-color: rgba(255,255,255,0.7);
+    background-blend-mode: lighten;
+}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Made by Alk</title>
+        <meta name="description" content="Sami Alkharrat started Made By Alk, a graphic designer based in the Twin Cities catering specifically to small martial arts businesses as well as other small business owners."/>
+        <link rel="stylesheet" href="css/styles.css"/>
+        <link rel="icon" type="image/x-icon" href="made_by_alk_web.ico">
+        <link rel="mask-icon" type="image/png" href="made_by_alk_web.png">
+        <link rel="apple-touch-icon" type="image/png" href="made_by_alk_web.png">
+        <link rel="preload" href="images/slide_1.jpg" as="image">
+        <link rel="preload" href="images/slide_2.jpg" as="image">
+        <link rel="preload" href="images/slide_3.jpg" as="image">
+<link rel="preload" href="images/slide_2.jpg" as="image">
+        <script src="js/main.js" defer></script>
+    </head>
+    <body>
+        <header class="container">
+            <div class="bar">
+                <button class="navbutton"></button>
+                <img id="logo" src="images/made_by_alk_full.png" width="310px" height="80px">
+            </div>
+            <hr class="navline">
+            <div class="navitems hidden" aria-expanded="false" aria-controls="navigation-menu">
+                <ul id="nav">
+                    <li><a href="/">HOME</a></li>
+                    <br>
+                    <li><a href="/contact">CONTACT</a></li>
+                    <br>
+                    <li><a href="/portfolio">PORTFOLIO</a></li>
+                </ul>
+            </div>
+        </header>
+        <section class="container">
+            <div class="highlights">
+                <div class="highlights-left">
+                    <span id="highlight-text">CLEAN<br>CUSTOM<br>APPAREL</span>
+                    <button onclick="window.location.href='/portfolio'" class="redirect" id="b1">LEARN MORE</button>
+                </div>
+                <ul id="slider-buttons">
+                    <li><button class="slider selected" id="SLIDE_1"></button></li>
+                    <li><button class="slider" id="SLIDE_2"></button></li>
+                    <li><button class="slider" id="SLIDE_3"></button></li>
+                </ul>
+            </div>
+        </section>
+        <hr class="secline">
+        <section class="container" style="background-color: black">
+            <div style="padding: 2.8rem; display: inline-block;">
+                <span id="about-me">ABOUT ME</span>
+                <br>
+                <div class="about-me-content">
+                    <img id="about-me-photo" src="images/about-me-image.jpeg">
+                    <h5 id="about-me-text">
+                        <span style="font-size: 30px;">Hi! I'm Sami Alkharrat</span>
+                        <br><br><br>
+                        I'm 18 years old, I grew up in Los Gatos, California, 
+                        and went to Los Gatos High School, where I discovered my passion for graphic design.
+                        Now, I am a professional graphic designer based in the Twin Cities where I am 
+                        also pursuing a B.S. in Computer Science at the University of Minnesota.
+                        <br><br>
+                        I'm also a professional martial artist competing on the NASKA circuit for the past two years.
+                        I started martial arts back in 2018 and started graphic design in 2022, and I decided to merge
+                        these two passions to hopefully give back to the martial arts community and to provide school
+                        owners with a way to make their brand as presentable and professional as possible! However, I still take
+                        on plenty of design jobs for other small business owners as well!
+                    </h5>
+                </div>
+            </div>
+        </section>
+        <hr class="secline">
+        <section class="container" id="contactme" style="height: 400px;">
+            <span style="font-size: 40px;">NEED A DESIGN JOB DONE?</span>
+            <h4 style="padding-top: 10px;">FILL OUT THE FORM.</h4>
+            <button class="redirect" id="b2" onclick="window.location.href='/contact'">CONTACT ME</button>
+        </section>
+        <section class="container" style="height: 50px; background-color: black;">
+            <h6 style="color: white; padding: 1.2rem;">Copyright © 2025 Made By Alk. All rights reserved.</h6>
+        </section>
+    </body>
+</html>
