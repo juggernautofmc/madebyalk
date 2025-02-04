@@ -1,0 +1,27 @@
+[
+    {
+        "title": "Infinity Gamma Class",
+        "description": "For the 3rd black belt graduating class of Infinity Martial Arts (dubbed Gamma Class), Sami Alkharrat was in charge of apparel, poster designs, stickers, and more.",
+        "images": ["../static/portfolios/01/image1.jpg", "../static/portfolios/01/image2.jpg", "../static/portfolios/01/image3.jpg", "../static/portfolios/01/image4.jpg", "../static/portfolios/01/image5.jpg"]
+    },
+    {
+        "title": "Evolution of CGN Sami Sampler",
+        "description": "This is a video sampler of Sami Alkharrat's martial arts journey leading up to his black belt test, edited by himself.",
+        "images": ["https://www.youtube.com/embed/KoFGIpdrc1g?si=-PEQwUoN7VswOLnW"]
+    },
+    {
+        "title": "Samantha Mitling: YouTube & Website Banners",
+        "description": "Samantha Mitling is a World Champion Martial Artist competing in the North American Sport Karate Association circuit (NASKA). She reached out to Sami Alkharrat for help with remaking her YouTube and website banner.",
+        "images": ["../static/portfolios/04/image1.jpg"]
+    },
+    {
+        "title": "Alk Consultancy",
+        "description": "Created a company identity concept for Ben Alkharrat's business consulting company: Alk Consultancy",
+        "images": ["../static/portfolios/02/image1.jpg", "../static/portfolios/02/image2.jpg", "../static/portfolios/02/image3.jpg", "../static/portfolios/02/image4.jpg", "../static/portfolios/02/image5.jpg", "../static/portfolios/02/image6.jpg", "../static/portfolios/02/image7.jpg", "../static/portfolios/02/image8.jpg", "../static/portfolios/02/image9.jpg", "../static/portfolios/02/image10.jpg", "../static/portfolios/02/image11.jpg"]
+    },
+    {
+        "title": "Santa Clara County's LEIHT",
+        "description": "Santa Clara County law enforcement's human trafficking division dubbed 'LEIHT' (Law Enforcement Investigating Human Trafficking) reached out to students of the graphic design program at Los Gatos High School, which Sami Alkharrat was a part of, to concept a secondary logo identity for the task force.",
+        "images": ["../static/portfolios/03/image1.jpg", "../static/portfolios/03/image2.jpg"]
+    }
+]

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Made by Alk - Contact</title>
+        <meta name="description" content="Sami Alkharrat started Made By Alk, a graphic designer based in the Twin Cities catering specifically to small martial arts businesses as well as other small business owners."/>
+        <link rel="stylesheet" href="../static/css/styles.css"/>
+        <link rel="icon" type="image/x-icon" href="../static/images/made_by_alk_web.ico">
+        <link rel="mask-icon" type="image/png" href="../static/images/made_by_alk_web.png">
+        <link rel="apple-touch-icon" type="image/png" href="../static/images/made_by_alk_web.png">
+        <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+        <script src="../static/js/contact.js" defer></script>
+    </head>
+    <body>
+        <header class="container">
+            <div class="bar">
+                <button class="navbutton"></button>
+                <img id="logo" src="../static/images/made_by_alk_full.png" width="310px" height="80px">
+            </div>
+            <hr class="navline">
+            <div class="navitems hidden">
+                <ul id="nav">
+                    <li><a href="/">HOME</a></li>
+                    <br>
+                    <li><a href="/contact">CONTACT</a></li>
+                    <br>
+                    <li><a href="/portfolio">PORTFOLIO</a></li>
+                </ul>
+            </div>
+        </header>
+        <section class="container" id="form">
+            <div class="form-content">
+                <div style="width: 40%;">    
+                    <span style="font-size: 40px;">"WHAT SERVICES DO YOU PROVIDE?"</span>
+                    <ul style="padding-top: 1rem">
+                        <li class="services" style="border-bottom: none;">
+                            <button class="dropdown" id="br"></button>
+                            <h3>BRANDING</h3>
+                            <div class="services-desc collapsed" id="txt1" aria-expanded="false" aria-controls="branding">
+                                Full branding identity package includes:<br><br>
+                                <ul class="services-list">
+                                    <li>Color and Black and White Logo ($200)</li>
+                                    <li>Business Card Design ($100)</li>
+                                    <li>Supplemental Website Kit ($200)</li>
+                                    <li>Social Media Package ($50)</li>
+                                    <li>Apparel Kit ($100)</li>
+                                </ul>
+                                <br><br>Total: $600<br>
+                                <div style="font-size: 10px; padding-top: 0.5rem;">*prices are estimates & negotiable, consultation required for exact pricing*</div>
+                                <br><br><a href="/portfolio">SEE EXAMPLE</a>
+                            </div>
+                        </li>
+                        <li class="services" style="border-bottom: none;">
+                            <button class="dropdown" id="ap"></button>
+                            <h3>APPAREL</h3>
+                            <div class="services-desc collapsed" id="txt2" aria-expanded="false" aria-controls="apparel">
+                                Full apparel services include:<br><br>
+                                <ul class="services-list">
+                                    <li>Apparel Design Services</li>
+                                    <li>Apparel Printing Services</li>
+                                </ul><br><br>
+                                Pricing varies widely depending on:<br><br>
+                                <ul class="services-list">
+                                    <li>Design complexity</li>
+                                    <li>Garment type</li>
+                                    <li># of Garments</li>
+                                    <li># of Colors in Design</li>
+                                </ul><br><br>
+                                <span style="padding-top: 0.5rem;">For exact pricing, please contact for a consultation</span>
+                                <br><br><a href="/portfolio">SEE EXAMPLE</a>
+                            </div>
+                        </li>
+                        <li class="services" style="border-bottom: none;">
+                            <button class="dropdown" id="sm"></button>
+                            <h3>SOCIAL MEDIA</h3>
+                            <div class="services-desc collapsed" id="txt3" aria-expanded="false" aria-controls="social-media">
+                                Social media services include:<br><br>
+                                <ul class="services-list">
+                                    <li>Social Media Banners</li>
+                                    <li>Social Media Posts (Instagram, TikTok)</li>
+                                </ul><br><br>
+                                Pricing varies widely depending on:<br><br>
+                                <ul class="services-list">
+                                    <li>Design complexity</li>
+                                    <li>Posts per week</li>
+                                </ul><br><br>
+                                <span style="padding-top: 0.5rem;">For exact pricing, please contact for a consultation</span>
+                                <br><br><a href="/portfolio">SEE EXAMPLE</a>
+                            </div>
+                        </li>
+                        <li class="services">
+                            <button class="dropdown" id="in"></button>
+                            <h3>INFOGRAPHICS</h3>
+                            <div class="services-desc collapsed" id="txt4" aria-expanded="false" aria-controls="infographics">
+                                <span>Infographics, advertisements, posters, or other miscellaneous graphics of any kind are under this category.</span>
+                                <br><br><span style="padding-top: 0.5rem;">For exact pricing, please contact for a consultation</span>
+                                <br><br><a href="/portfolio">SEE EXAMPLE</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <form action="/submit" method="POST" id="input-group" enctype="multipart/form-data">
+                    <span style="font-size: 25px;">CONTACT FORM</span>
+                    <div class="row">
+                        <input name="name" type="text" placeholder="Full Name*" required>
+                        <input name="company_name" type="text" placeholder="Company Name">
+                    </div>
+                    <div class="row">
+                        <select name="service_type" id="service-type" required>
+                            <option value="" selected disabled hidden>Pick a service</option>
+                            <option value="Branding">Branding</option>
+                            <option value="Apparel">Apparel</option>
+                            <option value="Social Media">Social Media</option>
+                            <option value="Infographics">Infographics</option>
+                            <option value="Other">Other (specify)</option>
+                        </select>
+                        <input name="email" type="text" placeholder="E-mail*" required>
+                    </div>
+                        <div class="dialog-box collapsed">
+                            <h4>Upload Vector Files for Apparel/Clips for Sampler</h4>
+                            <div class="file-input-container">
+                              <label for="fileInput" class="custom-file-button">Choose File</label>
+                              <input name="file" type="file" id="fileInput" class="file-input" accept=".zip"/>
+                              <div id="fileList">*COMPRESS YOUR FILES INTO ONE .ZIP FILE BEFORE UPLOADING*</div>
+                            </div>
+                          </div>
+                    <textarea name="message" placeholder="Please provide more details about your chosen design service*" required></textarea>
+                    <input class="redirect" type="submit">
+                </form>
+            </div>
+        </section>
+        <div style="display: none" id="submitted-data"
+            data-success="{{ success | tojson }}"
+            data-name="{{ name }}"
+            data-company="{{ company_name }}"
+            data-service="{{ service_type }}"
+            data-email="{{ email }}"
+            data-details="{{ message }}"
+            data-id="{{ id | tojson }}">
+        </div>
+        <section class="container" style="height: 50px; background-color: black;">
+            <h6 style="color: white; padding: 1.2rem;">Copyright © 2025 Made By Alk. All rights reserved.</h6>
+        </section>
+    </body>
+</html>
