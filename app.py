@@ -1,6 +1,5 @@
 import os
-import base64
-from flask import Flask, request, render_template, redirect, url_for, session, send_from_directory, Response
+from flask import Flask, request, render_template, send_from_directory, Response
 from flask_sqlalchemy import SQLAlchemy
 
 # Flask app initialization
