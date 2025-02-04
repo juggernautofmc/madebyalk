@@ -1,8 +1,15 @@
 {
-  "rewrites": [
-      { "source": "/", "destination": "/index.html" },
-      { "source": "/contact", "destination": "/contact.html" },
-      { "source": "/portfolio", "destination": "/past_work.html" },
-      { "source": "/admin", "destination": "/admin.html"}
+  "version": 2,
+  "builds": [
+    {
+      "src": "app.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "app.py"
+    }
   ]
 }
