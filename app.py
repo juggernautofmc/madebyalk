@@ -50,7 +50,8 @@ def defaults():
         "service_type": "",
         "email": "",
         "message": "",
-        "id": 0
+        "id": 0,
+        "key": "-CeJwZMGPM4E6Nfeb"
     }
 
 # Ensure database is created
