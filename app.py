@@ -8,7 +8,7 @@ app.secret_key = os.urandom(24)  # Required for session management
 
 # Set up the database path and configuration
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-DATABASE_PATH = os.path.join(BASE_DIR, 'data.db')
+DATABASE_PATH = os.path.join(BASE_DIR, 'tmp/data.db')
 app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DATABASE_PATH}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
