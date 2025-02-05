@@ -150,6 +150,7 @@ form.addEventListener('submit', async (event) => {
     event.preventDefault();
     formData = new FormData();
 
+    // Get form data
     let name = document.getElementById('name').value;
     let companyName = document.getElementById('company-name').value;
     let serviceType = document.getElementById('service-type').value;
