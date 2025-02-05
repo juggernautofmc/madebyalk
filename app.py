@@ -42,7 +42,7 @@ print(f"🚀 Database Location: {DATABASE_URL}")
 
 # Uploading a file to Vercel BLOB
 def upload(file):
-    headers = {"Authorization": f"Bearer {BLOB_TOKEN}"}
+    headers = {"Authorization": f"Bearer {BLOB_TOKEN}", "Content-Type": file.content_type or "application/octet-stream"}
     response = requests.put(f"{BLOB_URL}", headers=headers, data=file.stream.read())
 
     return response.json().get('url')
