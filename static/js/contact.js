@@ -1,5 +1,3 @@
-import { put } from '@vercel/blob'
-
 // EMAIL SCRIPT
 document.addEventListener('DOMContentLoaded', () => {
 const flaskData = document.getElementById('submitted-data').dataset;
