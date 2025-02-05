@@ -151,8 +151,8 @@ form.addEventListener('submit', async (event) => {
     formData = new FormData();
 
     let name = document.getElementById('name').value;
-    let companyName = document.getElementById('company_name').value;
-    let serviceType = document.getElementById('service_type').value;
+    let companyName = document.getElementById('company-name').value;
+    let serviceType = document.getElementById('service-type').value;
     let email = document.getElementById('email').value;
     let file = document.getElementById('fileInput').value;
     let message = document.getElementById('message').value;
