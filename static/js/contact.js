@@ -147,29 +147,34 @@ function handleFileSelect(event) {
 const form = document.getElementById('input-group');
 
 form.addEventListener('submit', async (event) => {
-    event.preventDefault();
-    formData = new FormData();
+    event.preventDefault();  // Prevent default form submission
 
-    // Get form data
-    let name = document.getElementById('name').value;
-    let companyName = document.getElementById('company-name').value;
-    let serviceType = document.getElementById('service-type').value;
-    let email = document.getElementById('email').value;
-    let file = document.getElementById('fileInput').value;
-    let message = document.getElementById('message').value;
+    const formData = new FormData();
+    let fileInput = document.getElementById('fileInput');
 
-    formData.append('name', name);
-    formData.append('company_name', companyName);
-    formData.append('service_type', serviceType);
-    formData.append('email', email);
+    if (!fileInput) {
+        console.error("❌ Error: File input element not found!");
+        alert("File input field is missing. Please contact support.");
+        return;
+    }
 
-    const { url } = await put(file.name, file.files[0], { access: 'public' });
+    if (fileInput.files.length === 0) {
+        console.warn("⚠️ No file selected, continuing without file upload.");
+    } else {
+        let file = fileInput.files[0];
 
-    file_path = url;
+        try {
+            const { url } = await window.put(file.name, file, { access: 'public' });
+            console.log("✅ File uploaded:", url);
+            formData.append('file_url', url);
+        } catch (error) {
+            console.error("❌ File upload error:", error);
+            alert("File upload failed. Please try again.");
+            return;
+        }
+    }
 
-    formData.append('file', file_path);
-    formData.append('message', message);
-
+    // Send form data to Flask
     fetch('/submit', {
         method: 'POST',
         body: formData
@@ -181,5 +186,9 @@ form.addEventListener('submit', async (event) => {
         } else {
             alert("Form submission failed: " + data.error);
         }
+    })
+    .catch(error => {
+        console.error("❌ Submission error:", error);
+        alert("Something went wrong. Please try again.");
     });
 });
