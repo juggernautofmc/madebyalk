@@ -15,7 +15,7 @@ BLOB_TOKEN = os.environ.get('BLOB_READ_WRITE_TOKEN')
 
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-BLOB_URL = "https://blob.vercel-storage.com"
+BLOB_URL = "https://xoexfhw5cyoavrhg.public.blob.vercel-storage.com"
 
 # Initialize SQLAlchemy
 db = SQLAlchemy(app)
@@ -42,9 +42,8 @@ print(f"🚀 Database Location: {DATABASE_URL}")
 
 # Uploading a file to Vercel BLOB
 def upload(file):
-    files = {"file": (file.filename, file.stream, file.content_type)}
     headers = {"Authorization": f"Bearer {BLOB_TOKEN}"}
-    response = requests.post(f"{BLOB_URL}/upload", files=files, headers=headers)
+    response = requests.put(f"{BLOB_URL}", headers=headers, data=file.stream.read())
 
     return response.json().get('url')
 
