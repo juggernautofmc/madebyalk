@@ -9,6 +9,7 @@ app = Flask(__name__)
 
 # Environment variables
 DATABASE_URL = os.environ.get('DATABASE_URL')
+DATABASE_URL.replace("postgres://", "postgresql://")
 EMAILJS_KEY = os.environ.get('EMAILJS_KEY')
 BLOB_TOKEN = os.environ.get('BLOB_READ_WRITE_TOKEN')
 
