@@ -84,6 +84,25 @@ def portfolio():
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
+# Admin route
+@app.route('/admin')
+def admin():
+    auth = request.authorization
+    if auth and auth.username == 'msalk.tr' and auth.password == 'Mminecraft9182$#':
+        customers = Customer.query.all()
+        customer_list = []
+        for customer in customers:
+            if customer.file_path:
+                idx = customer.file_path.find('tmp')
+                file = '/../' + customer.file_path[idx:]
+                customer_list.append({"id": customer.id, "file_path": file})
+        return render_template('admin.html', customers=customer_list)
+    else:
+        return Response(
+        "Unauthorized. Please provide credentials.", 401,
+        {"WWW-Authenticate": 'Basic realm="Login Required"'}
+        )
+
 # Submit form route
 @app.route('/submit', methods=['POST'])
 def submit_form():
