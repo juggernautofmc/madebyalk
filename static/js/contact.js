@@ -146,7 +146,8 @@ function handleFileSelect(event) {
 // CONTACT FORM SUBMISSION
 const form = document.getElementById('input-group');
 
-form.addEventListener('submit', async () => {
+form.addEventListener('submit', async (event) => {
+    event.preventDefault();
     formData = new FormData();
 
     let name = document.getElementById('name').value;
