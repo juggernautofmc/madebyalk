@@ -5,27 +5,23 @@ from flask_sqlalchemy import SQLAlchemy
 
 # Flask app initialization
 app = Flask(__name__)
-app.secret_key = os.urandom(24)  # Required for session management
 
-# Define database paths
-BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-ORIGINAL_DB_PATH = os.path.join(BASE_DIR, "data.db")  # Read-only database
-TMP_DB_PATH = "/tmp/data.db"  # ✅ Writable database location
+# Define paths
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DB_SOURCE = os.path.join(BASE_DIR, "data.db")  # Read-only database in project folder
+DB_TMP = "/tmp/data.db"  # Writable database in /tmp/
 
-# Ensure the database exists in /tmp/
-if os.path.exists(ORIGINAL_DB_PATH) and not os.path.exists(TMP_DB_PATH):
-    shutil.copy(ORIGINAL_DB_PATH, TMP_DB_PATH)  # ✅ Copy DB to writable location
+# If no database exists in /tmp/, copy one from DB_SOURCE if available.
+if not os.path.exists(DB_TMP):
+    if os.path.exists(DB_SOURCE):
+        shutil.copy(DB_SOURCE, DB_TMP)  # Copy existing DB
+    # Otherwise, do nothing and let SQLite create the file
 
-# Configure SQLite database in /tmp/
-app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{TMP_DB_PATH}"
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+# Use /tmp/ as the active database
+app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{DB_TMP}"
 
 # Initialize SQLAlchemy
 db = SQLAlchemy(app)
-
-# ✅ Ensure database schema exists
-with app.app_context():
-    db.create_all()
 
 # Define the Customer model
 class Customer(db.Model):
@@ -37,15 +33,21 @@ class Customer(db.Model):
     file_path = db.Column(db.String(300))  # Store file path for uploaded files
     message = db.Column(db.String(2000), nullable=False)
 
-# ✅ Ensure `/tmp/uploads/` exists for storing files
+# Create Database
+with app.app_context():
+    print("🚀 Running db.create_all()...")
+    db.create_all()
+    print("✅ Database tables should now be created!")
+
+# Ensure `/tmp/uploads/` exists for storing files
 UPLOAD_FOLDER = "/tmp/uploads"
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER  # Use writable upload path
 
-# 🚀 Debugging: Print paths on startup
-print(f"🚀 Database Location: {TMP_DB_PATH}")
+# Debugging: Print paths on startup
+print(f"🚀 Database Location: {DB_TMP}")
 print(f"🚀 Uploads Folder: {UPLOAD_FOLDER}")
 
 # Context processor to put default values for render_template
@@ -77,7 +79,7 @@ def contact():
 def portfolio():
     return render_template('past_work.html')
 
-# ✅ Serve uploaded files
+# Serve uploaded files
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
@@ -96,14 +98,14 @@ def submit_form():
 
         print("🚀 Received Form Data:", name, company_name, service_type, email, message)
 
-        # ✅ Save file if uploaded (store in `/tmp/uploads/`)
+        # Save file if uploaded (store in `/tmp/uploads/`)
         file_path = None
         if file and file.filename != '':
             file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
-            file.save(file_path)  # ✅ Save file in writable directory
+            file.save(file_path)  # Save file in writable directory
             print(f"📁 File saved at: {file_path}")
 
-        # ✅ Save customer info to the database
+        # Save customer info to the database
         customer = Customer(name=name, company_name=company_name,
                             service_type=service_type, email=email,
                             file_path=file_path, message=message)
