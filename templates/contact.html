@@ -10,7 +10,10 @@
         <link rel="mask-icon" type="image/png" href="../static/images/made_by_alk_web.png">
         <link rel="apple-touch-icon" type="image/png" href="../static/images/made_by_alk_web.png">
         <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-        <script type="module" src="../static/js/contact.js" defer></script>
+        <script type="module">
+            import { put } from "https://esm.sh/@vercel/blob";
+        </script>
+        <script src="../static/js/contact.js" defer></script>
     </head>
     <body>
         <header class="container">
