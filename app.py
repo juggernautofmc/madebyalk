@@ -109,7 +109,7 @@ def submit_form():
         print("🚀 Received Form Data:", name, company_name, service_type, email, message)
 
         # Upload the file
-        file_path = file.upload(file)
+        file_path = upload(file)
 
         # Save customer info to the database
         customer = Customer(name=name, company_name=company_name,
