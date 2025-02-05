@@ -1,24 +1,20 @@
 import os
 import shutil
+import requests
 from flask import Flask, request, render_template, send_from_directory, Response, url_for
 from flask_sqlalchemy import SQLAlchemy
 
 # Flask app initialization
 app = Flask(__name__)
 
-# Define paths
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-DB_SOURCE = os.path.join(BASE_DIR, "data.db")  # Read-only database in project folder
-DB_TMP = "/tmp/data.db"  # Writable database in /tmp/
+# Environment variables
+DATABASE_URL = os.environ.get('DATABASE_URL')
+EMAILJS_KEY = os.environ.get('EMAILJS_KEY')
+BLOB_TOKEN = os.environ.get('BLOB_READ_WRITE_TOKEN')
 
-# If no database exists in /tmp/, copy one from DB_SOURCE if available.
-if not os.path.exists(DB_TMP):
-    if os.path.exists(DB_SOURCE):
-        shutil.copy(DB_SOURCE, DB_TMP)  # Copy existing DB
-    # Otherwise, do nothing and let SQLite create the file
-
-# Use /tmp/ as the active database
-app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{DB_TMP}"
+app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+BLOB_URL = "https://blob.vercel-storage.com"
 
 # Initialize SQLAlchemy
 db = SQLAlchemy(app)
@@ -39,16 +35,17 @@ with app.app_context():
     db.create_all()
     print("✅ Database tables should now be created!")
 
-# Ensure `/tmp/uploads/` exists for storing files
-UPLOAD_FOLDER = "/tmp/uploads"
-if not os.path.exists(UPLOAD_FOLDER):
-    os.makedirs(UPLOAD_FOLDER)
-
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER  # Use writable upload path
 
 # Debugging: Print paths on startup
-print(f"🚀 Database Location: {DB_TMP}")
-print(f"🚀 Uploads Folder: {UPLOAD_FOLDER}")
+print(f"🚀 Database Location: {DATABASE_URL}")
+
+# Uploading a file to Vercel BLOB
+def upload(file):
+    files = {"file": (file.filename, file.stream, file.content_type)}
+    headers = {"Authorization": f"Bearer {BLOB_TOKEN}"}
+    response = requests.post(f"{BLOB_URL}/upload", files=files, headers=headers)
+
+    return response.json().get('url')
 
 # Context processor to put default values for render_template
 @app.context_processor
@@ -61,7 +58,7 @@ def defaults():
         "email": "",
         "message": "",
         "id": 0,
-        "key": "-CeJwZMGPM4E6Nfeb"
+        "key": EMAILJS_KEY
     }
 
 # Home route
@@ -79,11 +76,6 @@ def contact():
 def portfolio():
     return render_template('past_work.html')
 
-# Serve uploaded files
-@app.route('/uploads/<filename>')
-def uploaded_file(filename):
-    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
-
 # Admin route
 @app.route('/admin')
 def admin():
@@ -93,11 +85,7 @@ def admin():
         customer_list = []
         for customer in customers:
             if customer.file_path:
-                # Extract just the filename
-                filename = os.path.basename(customer.file_path)
-                # Build the URL using url_for
-                file_url = url_for('uploaded_file', filename=filename)
-                customer_list.append({"id": customer.id, "file_path": file_url})
+                customer_list.append({"id": customer.id, "file_path": customer.file_path})
         return render_template('admin.html', customers=customer_list)
     else:
         return Response(
@@ -119,12 +107,8 @@ def submit_form():
 
         print("🚀 Received Form Data:", name, company_name, service_type, email, message)
 
-        # Save file if uploaded (store in `/tmp/uploads/`)
-        file_path = None
-        if file and file.filename != '':
-            file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
-            file.save(file_path)  # Save file in writable directory
-            print(f"📁 File saved at: {file_path}")
+        # Upload the file
+        file_path = file.upload(file)
 
         # Save customer info to the database
         customer = Customer(name=name, company_name=company_name,
