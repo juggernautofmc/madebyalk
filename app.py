@@ -1,6 +1,6 @@
 import os
 import shutil
-from flask import Flask, request, render_template, send_from_directory, Response
+from flask import Flask, request, render_template, send_from_directory, Response, url_for
 from flask_sqlalchemy import SQLAlchemy
 
 # Flask app initialization
@@ -93,9 +93,11 @@ def admin():
         customer_list = []
         for customer in customers:
             if customer.file_path:
-                idx = customer.file_path.find('tmp')
-                file = '/../' + customer.file_path[idx:]
-                customer_list.append({"id": customer.id, "file_path": file})
+                # Extract just the filename
+                filename = os.path.basename(customer.file_path)
+                # Build the URL using url_for
+                file_url = url_for('uploaded_file', filename=filename)
+                customer_list.append({"id": customer.id, "file_path": file_url})
         return render_template('admin.html', customers=customer_list)
     else:
         return Response(
