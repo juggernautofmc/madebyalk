@@ -10,7 +10,7 @@
         <link rel="mask-icon" type="image/png" href="../static/images/made_by_alk_web.png">
         <link rel="apple-touch-icon" type="image/png" href="../static/images/made_by_alk_web.png">
         <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-        <script src="../static/js/contact.js" defer></script>
+        <script type="module" src="../static/js/contact.js" defer></script>
     </head>
     <body>
         <header class="container">
@@ -100,11 +100,11 @@
                         </li>
                     </ul>
                 </div>
-                <form action="/submit" method="POST" id="input-group" enctype="multipart/form-data">
+                <form id="input-group" enctype="multipart/form-data">
                     <span style="font-size: 25px;">CONTACT FORM</span>
                     <div class="row">
-                        <input name="name" type="text" placeholder="Full Name*" required>
-                        <input name="company_name" type="text" placeholder="Company Name">
+                        <input name="name" id="name" type="text" placeholder="Full Name*" required>
+                        <input name="company_name" id="company_name" id type="text" placeholder="Company Name">
                     </div>
                     <div class="row">
                         <select name="service_type" id="service-type" required>
@@ -115,7 +115,7 @@
                             <option value="Infographics">Infographics</option>
                             <option value="Other">Other (specify)</option>
                         </select>
-                        <input name="email" type="text" placeholder="E-mail*" required>
+                        <input name="email" id="email" type="text" placeholder="E-mail*" required>
                     </div>
                         <div class="dialog-box collapsed">
                             <h4>Upload Vector Files for Apparel/Clips for Sampler</h4>
@@ -125,7 +125,7 @@
                               <div id="fileList">*COMPRESS YOUR FILES INTO ONE .ZIP FILE BEFORE UPLOADING*</div>
                             </div>
                           </div>
-                    <textarea name="message" placeholder="Please provide more details about your chosen design service*" required></textarea>
+                    <textarea name="message" id="message" placeholder="Please provide more details about your chosen design service*" required></textarea>
                     <input class="redirect" type="submit">
                 </form>
             </div>

@@ -40,12 +40,6 @@ with app.app_context():
 # Debugging: Print paths on startup
 print(f"🚀 Database Location: {DATABASE_URL}")
 
-# Uploading a file to Vercel BLOB
-def upload(file):
-    headers = {"Authorization": f"Bearer {BLOB_TOKEN}", "Content-Type": file.content_type or "application/octet-stream"}
-    response = requests.put(f"{BLOB_URL}", headers=headers, data=file.stream.read())
-
-    return response.json().get('url')
 
 # Context processor to put default values for render_template
 @app.context_processor
@@ -102,13 +96,10 @@ def submit_form():
         company_name = request.form.get('company_name')
         service_type = request.form.get('service_type')
         email = request.form.get('email')
-        file = request.files.get('file')  # Handle file upload
+        file_path = request.form.get('file')  # Handle file upload
         message = request.form.get('message')
 
-        print("🚀 Received Form Data:", name, company_name, service_type, email, message)
-
-        # Upload the file
-        file_path = upload(file)
+        print("🚀 Received Form Data:", name, company_name, service_type, email, message, file_path)
 
         # Save customer info to the database
         customer = Customer(name=name, company_name=company_name,

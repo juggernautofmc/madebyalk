@@ -1,3 +1,5 @@
+import { put } from "@vercel/blob";
+
 // EMAIL SCRIPT
 document.addEventListener('DOMContentLoaded', () => {
 const flaskData = document.getElementById('submitted-data').dataset;
@@ -142,3 +144,42 @@ function handleFileSelect(event) {
       fileListDiv.textContent = 'No files selected.';
     }
   }
+
+// CONTACT FORM SUBMISSION
+const form = document.getElementById('input-group');
+
+form.addEventListener('submit', async () => {
+    formData = new FormData();
+
+    let name = document.getElementById('name').value;
+    let companyName = document.getElementById('company_name').value;
+    let serviceType = document.getElementById('service_type').value;
+    let email = document.getElementById('email').value;
+    let file = document.getElementById('fileInput').value;
+    let message = document.getElementById('message').value;
+
+    formData.append('name', name);
+    formData.append('company_name', companyName);
+    formData.append('service_type', serviceType);
+    formData.append('email', email);
+
+    const { url } = await put(file.name, file.files[0], { access: 'public' });
+
+    file_path = url;
+
+    formData.append('file', file_path);
+    formData.append('message', message);
+
+    fetch('/submit', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            window.location.href = "/submit";  // Redirect to Flask route
+        } else {
+            alert("Form submission failed: " + data.error);
+        }
+    });
+});
