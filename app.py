@@ -1,7 +1,7 @@
 import os
 import shutil
 import requests
-from flask import Flask, request, render_template, send_from_directory, Response, url_for, session, jsonify
+from flask import Flask, request, render_template, send_from_directory, Response, url_for, session
 from flask_sqlalchemy import SQLAlchemy
 
 # Flask app initialization
@@ -10,8 +10,6 @@ app = Flask(__name__)
 # Environment variables
 DATABASE_URL = os.environ.get('DATABASE_URL')
 DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://")
-EMAILJS_KEY = os.environ.get('EMAILJS_KEY')
-BLOB_TOKEN = os.environ.get('BLOB_READ_WRITE_TOKEN')
 
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -62,18 +60,16 @@ def home():
 # BLOB KEY
 @app.route('/blobtoken')
 def blob_token():
-    return jsonify({'BLOB_TOKEN': session.get('BLOB_TOKEN', None)})
+    return {'BLOB_TOKEN': os.environ.get('BLOB_READ_WRITE_TOKEN')}
 
 # EMAILJS_KEY
 @app.route('/emailjs')
 def emailjs():
-    return jsonify({'EMAILJS_KEY': session.get('EMAILJS_KEY', None)})
+    return {'EMAILJS_KEY': os.environ.get('EMAILJS_KEY')}
 
 # Contact route
 @app.route('/contact')
 def contact():
-    session['EMAILJS_KEY'] = EMAILJS_KEY
-    session['BLOB_TOKEN'] = BLOB_TOKEN
     return render_template('contact.html')
 
 # Portfolio route

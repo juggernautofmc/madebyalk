@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', () => {
 const flaskData = document.getElementById('submitted-data').dataset;
 
 let success = JSON.parse(flaskData.success);
+EMAILJS_KEY = null;
+BLOB_TOKEN = null;
 
 // FETCH EMAILJS KEY
 fetch('/emailjs')
