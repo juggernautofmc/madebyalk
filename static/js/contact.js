@@ -164,7 +164,6 @@ const form = document.getElementById('input-group');
 form.addEventListener('submit', async (event) => {
     event.preventDefault();  // Prevent default form submission
 
-    const formData = new FormData();
     let fileInput = document.getElementById('fileInput');
 
     if (!fileInput) {
@@ -181,7 +180,10 @@ form.addEventListener('submit', async (event) => {
         try {
             const { url } = await window.put(file.name, file, { access: 'public', token: BLOB_TOKEN });
             console.log("✅ File uploaded:", url);
-            formData.append('file_url', url);
+            
+            fileInput.type = 'hidden';
+            fileInput.value = url;
+
         } catch (error) {
             console.error("❌ File upload error:", error);
             alert("File upload failed. Please try again.");
@@ -190,20 +192,5 @@ form.addEventListener('submit', async (event) => {
     }
 
     // Send form data to Flask
-    fetch('/submit', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            window.location.href = "/submit";  // Redirect to Flask route
-        } else {
-            alert("Form submission failed: " + data.error);
-        }
-    })
-    .catch(error => {
-        console.error("❌ Submission error:", error);
-        alert("Something went wrong. Please try again.");
-    });
+    form.submit();
 });
