@@ -19,18 +19,28 @@ function getEmailJSKey() {
     })
 }
 
+function getBLOBToken() {
+    return new Promise((resolve, reject) => {
+        if (BLOB_TOKEN) {
+            resolve(BLOB_TOKEN)
+            return;
+        }
+
+        // FETCH BLOB TOKEN
+        fetch('/blobtoken')
+        .then(response => response.json())
+        .then(data => {
+            BLOB_TOKEN = data.BLOB_TOKEN;
+            resolve(BLOB_TOKEN);
+        });
+    })
+}
+
 // EMAIL SCRIPT
 document.addEventListener('DOMContentLoaded', async () => {
 const flaskData = document.getElementById('submitted-data').dataset;
 
 let success = JSON.parse(flaskData.success);
-
-// FETCH BLOB TOKEN
-fetch('/blobtoken')
-    .then(response => response.json())
-    .then(data => {
-        BLOB_TOKEN = data.BLOB_TOKEN;
-    });
 
 if (success) {
     let ID = JSON.parse(flaskData.id);
@@ -51,7 +61,7 @@ if (success) {
 
     // FETCH EMAILJS KEY AND WAIT FOR IT TO LOAD
     await getEmailJSKey();
-    
+
     emailjs.send("service_cxcl4of", "template_0lsqlog", emailParams, EMAILJS_KEY)
     .then((response) => {
         console.log("Email to client: Success!", response.status, response.text);
@@ -193,6 +203,7 @@ form.addEventListener('submit', async (event) => {
         let file = fileInput.files[0];
 
         try {
+            await getBLOBToken();
             const { url } = await window.put(file.name, file, { access: 'public', token: BLOB_TOKEN });
             console.log("✅ File uploaded:", url);
             
