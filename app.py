@@ -1,7 +1,7 @@
 import os
 import shutil
 import requests
-from flask import Flask, request, render_template, send_from_directory, Response, url_for
+from flask import Flask, request, render_template, send_from_directory, Response, url_for, session, jsonify
 from flask_sqlalchemy import SQLAlchemy
 
 # Flask app initialization
@@ -52,7 +52,6 @@ def defaults():
         "email": "",
         "message": "",
         "id": 0,
-        "key": EMAILJS_KEY
     }
 
 # Home route
@@ -60,9 +59,21 @@ def defaults():
 def home():
     return render_template('index.html')
 
+# BLOB KEY
+@app.route('/blobtoken')
+def blob_token():
+    return jsonify({'BLOB_TOKEN': session.get('BLOB_TOKEN', None)})
+
+# EMAILJS_KEY
+@app.route('/emailjs')
+def emailjs():
+    return jsonify({'EMAILJS_KEY': session.get('EMAILJS_KEY', None)})
+
 # Contact route
 @app.route('/contact')
 def contact():
+    session['EMAILJS_KEY'] = EMAILJS_KEY
+    session['BLOB_TOKEN'] = BLOB_TOKEN
     return render_template('contact.html')
 
 # Portfolio route

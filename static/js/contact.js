@@ -3,8 +3,21 @@ document.addEventListener('DOMContentLoaded', () => {
 const flaskData = document.getElementById('submitted-data').dataset;
 
 let success = JSON.parse(flaskData.success);
-const key = flaskData.key;
-emailjs.init(key);
+
+// FETCH EMAILJS KEY
+fetch('/emailjs')
+    .then(response => response.json())
+    .then(data => {
+        EMAILJS_KEY = data.EMAILJS_KEY;
+    });
+emailjs.init(EMAILJS_KEY);
+
+// FETCH BLOB TOKEN
+fetch('/blobtoken')
+    .then(response => response.json())
+    .then(data => {
+        BLOB_TOKEN = data.BLOB_TOKEN;
+    });
 
 if (success) {
     let ID = JSON.parse(flaskData.id);
@@ -164,7 +177,7 @@ form.addEventListener('submit', async (event) => {
         let file = fileInput.files[0];
 
         try {
-            const { url } = await window.put(file.name, file, { access: 'public' });
+            const { url } = await window.put(file.name, file, { access: 'public', token: BLOB_TOKEN });
             console.log("✅ File uploaded:", url);
             formData.append('file_url', url);
         } catch (error) {
