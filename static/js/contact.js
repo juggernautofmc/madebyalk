@@ -11,8 +11,8 @@ fetch('/emailjs')
     .then(response => response.json())
     .then(data => {
         EMAILJS_KEY = data.EMAILJS_KEY;
+        emailjs.init(EMAILJS_KEY);
     });
-emailjs.init(EMAILJS_KEY);
 
 // FETCH BLOB TOKEN
 fetch('/blobtoken')
@@ -37,7 +37,7 @@ if (success) {
         service: serv,
         message: details
     };
-    
+
     emailjs.send("service_cxcl4of", "template_0lsqlog", emailParams, EMAILJS_KEY)
     .then((response) => {
         console.log("Email to client: Success!", response.status, response.text);
@@ -173,7 +173,8 @@ form.addEventListener('submit', async (event) => {
     }
 
     if (fileInput.files.length === 0) {
-        console.warn("⚠️ No file selected, continuing without file upload.");
+        form.submit();
+        return;
     } else {
         let file = fileInput.files[0];
 
