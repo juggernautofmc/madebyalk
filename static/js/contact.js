@@ -1,18 +1,29 @@
-// EMAIL SCRIPT
-document.addEventListener('DOMContentLoaded', () => {
-const flaskData = document.getElementById('submitted-data').dataset;
-
-let success = JSON.parse(flaskData.success);
 EMAILJS_KEY = null;
 BLOB_TOKEN = null;
 
-// FETCH EMAILJS KEY
-fetch('/emailjs')
-    .then(response => response.json())
-    .then(data => {
-        EMAILJS_KEY = data.EMAILJS_KEY;
-        emailjs.init(EMAILJS_KEY);
-    });
+function getEmailJSKey() {
+    return new Promise((resolve, reject) => {
+        if (EMAILJS_KEY) {
+            resolve(EMAILJS_KEY);
+            return;
+        }
+
+        // FETCH EMAILJS KEY
+        fetch('/emailjs')
+        .then(response => response.json())
+        .then(data => {
+            EMAILJS_KEY = data.EMAILJS_KEY;
+            emailjs.init(EMAILJS_KEY);
+            resolve(EMAILJS_KEY);
+        });
+    })
+}
+
+// EMAIL SCRIPT
+document.addEventListener('DOMContentLoaded', async () => {
+const flaskData = document.getElementById('submitted-data').dataset;
+
+let success = JSON.parse(flaskData.success);
 
 // FETCH BLOB TOKEN
 fetch('/blobtoken')
@@ -38,6 +49,9 @@ if (success) {
         message: details
     };
 
+    // FETCH EMAILJS KEY AND WAIT FOR IT TO LOAD
+    await getEmailJSKey();
+    
     emailjs.send("service_cxcl4of", "template_0lsqlog", emailParams, EMAILJS_KEY)
     .then((response) => {
         console.log("Email to client: Success!", response.status, response.text);
