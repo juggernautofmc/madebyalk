@@ -38,10 +38,10 @@ if (success) {
         message: details
     };
     
-    emailjs.send("service_cxcl4of", "template_0lsqlog", emailParams, key)
+    emailjs.send("service_cxcl4of", "template_0lsqlog", emailParams, EMAILJS_KEY)
     .then((response) => {
         console.log("Email to client: Success!", response.status, response.text);
-        emailjs.send("service_cxcl4of", "template_e4h1sos", emailParams, key)
+        emailjs.send("service_cxcl4of", "template_e4h1sos", emailParams, EMAILJS_KEY)
         .then((response) => {
             console.log("Email to system: Success!", response.status, response.text);
             alert("Thank you for submitting! A confirmation email has just been sent out to you.");
