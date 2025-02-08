@@ -3,29 +3,28 @@ Made By Alk Website
 
 Hi, I'm Sami Alkharrat. These are the server files for the Made By Alk Website!
 
-This uses a Flask app framework, no front end framework (so pure HTML, CSS, JS)
+This uses a Flask app framework, no front end framework (so pure HTML, CSS, JS).
 
-I made this to have something presentable for my graphic design brand,
-and also partly as a resume item. Besides that, though, this project is
-particularly special to me as it was my first real exposure to web design
-both on the frontend and on the backend with Flask. At times it was painful,
+It's a fairly recent undertaking of mine, and yes, many will raise an eyebrow at the lack
+of a front end framework such as React, Next.js, or Vue.js. This wasn't really a
+purposeful decision, and it more has to do with order in which I learned the languages as
+I went about this project.
+
+This project is particularly special to me as it was my first real exposure to web design
+both on the frontend and on the backend with Flask. I literally had never full stack
+developed a website myself before, or even wrote a single line of code for the web ever
+before this. I opted to learn the ins and outs of HTML, CSS, and JavaScript because I knew
+that learning those fundamental languages thoroughly would serve me well when I did eventually
+go on to start using frameworks and other tools of the like.
+
+At times it was painful,
 but I look back and realize how fun it was making this.
 
-I do hope to scale up this website in the future as demand for the business grows.
+I do actually use this for my graphic design brand Made By Alk and I plan
+to continue improving and adding onto it as time goes on. Some kind of overhaul of it
+is definitely inevitable once I hone my skills further :)
 
-If you want to run this yourself locally, you may do so by downloading the server files.
-However...
-**PLEASE DO NOT ACTUALLY HOST THIS SERVER YOURSELF**
-Since this is the intellectual property of the brand and the business
-The only domain this website should be on is your localhost or madebyalk.com!
-
-With that being said, running it locally is still okay!
-If that is you, ensure you have these installed in your working directory:
-1. Python 3.x
-2. Flask
-3. EmailJS
-
-Other than that, you should be good to go!
+Other than that, I hope you enjoy the look and feel of the website!
 
 Questions?
 Phone: 650-772-2011
