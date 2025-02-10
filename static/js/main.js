@@ -10,7 +10,7 @@ navButton.addEventListener('click', () => {
 
 // HIGHLIGHTS HOME PAGE SCRIPT
 const time = 7000;
-const images = ['/static/images/slide_1.jpg', '/static/images/slide_2.jpg', '/static/images/slide_3.jpg'];
+const images = ['/static/images/slide_1.webp', '/static/images/slide_2.webp', '/static/images/slide_3.webp'];
 const captions = ['CLEAN<br>CUSTOM<br>APPAREL', 'SOCIAL<br>MEDIA<br>BANNERS', 'DESIGN<br>FOR & BY<br>MARTIAL<br>ARTISTS'];
 const pos = ['0px -20px', '-380px 100px', '-180px 0px'];
 const scale = ['100%', '180%', '121%'];
