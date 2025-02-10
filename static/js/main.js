@@ -25,8 +25,6 @@ var index = 0;
 
 function slider(i) {
     img.style.backgroundImage = "url('" + images[i] + "')";
-    img.style.backgroundPosition = pos[i];
-    img.style.backgroundSize = scale[i];
     selectedSlide.classList.toggle('selected');
     slides[i].classList.toggle('selected');
     selectedSlide = document.querySelector('.selected');

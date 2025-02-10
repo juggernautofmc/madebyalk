@@ -5,6 +5,26 @@
     src: url('../fonts/Heavitas.woff') format('woff');
     }
 
+#logo {
+    width: 310px;
+    height: 80px;
+}
+
+@media (max-width: 550px) {
+    #logo {
+        opacity: 0;
+    }
+    .highlights {
+        position: relative;
+        padding-top: 120px;
+        height: 750px;
+        background-image: url('../images/slide_1.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position-x: -200px;
+    }
+}
+
 * {
     padding: 0;
     margin: 0;
@@ -14,7 +34,7 @@
 
 .container {
     width: 100%;
-    min-width: 900px;
+    /*min-width: 900px;*/
     margin: auto;
 }
 
@@ -101,8 +121,8 @@ a {
     height: 750px;
     background-image: url('../images/slide_1.jpg');
     background-repeat: no-repeat;
-    background-size: 100%;
-    background-position-y: -20px;
+    background-size: cover;
+    background-position-y: 20px;
 }
 
 .highlights-left {
@@ -115,7 +135,7 @@ hr {
     border: none;
     background-color:black;
     height: 2px;
-    min-width: 900px;
+    /*min-width: 900px;*/
 }
 
 #highlight-text {
@@ -179,10 +199,11 @@ hr {
 
 #about-me-text {
     text-align: center;
+    margin: 2rem;
     line-height: 25px;
     position: relative;
     color: white;
-    width: 40%;
+    width: 80%;
 }
 
 #about-me-photo {
@@ -191,14 +212,15 @@ hr {
     padding-top: 2rem;
 }
 
-.secline {
+/*.secline {
     min-width: 900px;
-}
+}*/
 
 .about-me-content {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    justify-content: space-between;
 }
 
 #contactme {
@@ -222,6 +244,31 @@ hr {
     background-size: 50%;
     background-color: rgba(255,255,255,0.7);
     background-blend-mode: lighten;
+}
+
+#info {
+    width: 40%;
+}
+
+
+@media (max-width: 800px) {
+    .form-content {
+        display: flex;
+        flex-direction: column;
+    }
+    #input-group {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        width: 400px;
+        height: 450px;
+        max-height: 600px;
+        margin-top: 2rem;
+    }
+    #info {
+        width: 288px;
+    }
 }
 
 .form-content {
@@ -332,6 +379,53 @@ textarea {
     border: 1.5px solid #000;    /* Replace with your dialog's border color */
     font-family: Arial, sans-serif; /* Ensure consistent font */
   }
+
+@media (max-width: 550px) {
+    #input-group {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        width: 300px;
+        height: 450px;
+        max-height: 600px;
+    }
+    input[type="text"] {
+        width: 100px;
+        height: 40px;
+        padding-left: 15px;
+        padding-top: 2px;
+        padding-right: 15px;
+        border: solid;
+        border-width: 1.5px;
+        outline: none;
+    }
+    select {
+        width: 132px;
+        height: 45px;
+        padding-left: 15px;
+        padding-top: 2px;
+        border: solid;
+        border-width: 1.5px;
+        outline: none;
+    }
+    /* Dialog Box Styling */
+    .dialog-box {
+        width: 270px;
+        padding: 20px;
+        background-color: #ffffff; /* Replace with your dialog's background color */
+        border: 1.5px solid #000;    /* Replace with your dialog's border color */
+        font-family: Arial, sans-serif; /* Ensure consistent font */
+    }
+    textarea {
+        width: 280px;
+        height: 200px;
+        padding: 15px;
+        border: solid;
+        border-width: 1.5px;
+        outline: none;
+    }
+}
   
   /* Heading Styling */
   .dialog-box h4 {
@@ -363,6 +457,7 @@ textarea {
     cursor: pointer;
     font-size: 12px;
     transition: background-color 0.3s;
+    text-align: center;
   }
   
   /* Button Hover Effect */
@@ -391,28 +486,16 @@ textarea {
 }
 
 #portfolio-title {
-    position: relative; 
-    left: 40%;
+    position: relative;
     text-align: center;
     font-size: 50px;
 }
 
-@media (max-width: 1200px) {
-    #portfolio-title {
-        position: relative; 
-        left: 37%;
-        text-align: center;
-        font-size: 50px;
-    }
-}
-
-@media (max-width: 950px) {
-    #portfolio-title {
-        position: relative; 
-        left: 34%;
-        text-align: center;
-        font-size: 50px;
-    }
+#portfolio {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .portfolio-entry {
