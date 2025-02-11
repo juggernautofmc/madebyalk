@@ -10,6 +10,7 @@
         <link rel="mask-icon" type="image/png" href="../static/images/made_by_alk_web.png">
         <link rel="apple-touch-icon" type="image/png" href="../static/images/made_by_alk_web.png">
         <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+        <script src="https://www.google.com/recaptcha/api.js?render=6Lepa9MqAAAAAIKYPPskzGqKPDZaQurzfOD6MEP5"></script>
         <script type="module">
             import { put } from "https://esm.sh/@vercel/blob";
             window.put = put;
@@ -130,6 +131,7 @@
                             </div>
                           </div>
                     <textarea name="message" id="message" placeholder="Please provide more details about your chosen design service*" required></textarea>
+                    <input type="hidden" id="recaptcha-token" name="recaptcha_token" required>
                     <input class="redirect" type="submit">
                 </form>
             </div>

@@ -9,6 +9,7 @@ app = Flask(__name__)
 
 # Environment variables
 DATABASE_URL = os.environ.get('DATABASE_URL')
+CAPTCHA_SECRET_KEY = os.environ.get('CAPTCHA_SECRET_KEY')
 DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://")
 
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
@@ -37,6 +38,15 @@ with app.app_context():
 
 # Debugging: Print paths on startup
 print(f"🚀 Database Location: {DATABASE_URL}")
+
+# CAPTCHA function
+def captcha(token):
+    url = "https://www.google.com/recaptcha/api/siteverify"
+    data = {"secret": CAPTCHA_SECRET_KEY, "response": token}
+    response = requests.post(url, data)
+    result = response.json()
+
+    return result.get("success", False) and result.get("score", 0) >= 0.5
 
 
 # Context processor to put default values for render_template
@@ -105,6 +115,12 @@ def submit_form():
         email = request.form.get('email')
         file_path = request.form.get('file')  # Handle file upload
         message = request.form.get('message')
+        recaptcha_token = request.form.get('recaptcha_token')
+
+        # Verify this is a human request
+        if not (recaptcha_token and captcha(recaptcha_token)):
+            return "Error: Bot detected"
+        
 
         print("🚀 Received Form Data:", name, company_name, service_type, email, message, file_path)
 
