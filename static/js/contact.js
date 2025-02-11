@@ -188,11 +188,16 @@ const form = document.getElementById('input-group');
 form.addEventListener('submit', async (event) => {
     event.preventDefault();  // Prevent default form submission
 
-    grecaptcha.ready(() => {
-        grecaptcha.execute("6Lepa9MqAAAAAIKYPPskzGqKPDZaQurzfOD6MEP5", { action: "submit" }).then(function(token) {
-            document.getElementById('recaptcha-token').value = token;
+    const token = await new Promise((resolve, reject) => {
+        grecaptcha.ready(() => {
+            grecaptcha.execute("6Lepa9MqAAAAAIKYPPskzGqKPDZaQurzfOD6MEP5", { action: "submit" })
+            .then(resolve)
+            .catch(reject);
         });
     });
+
+    document.getElementById('recaptcha-token').value = token;
+    
 
     let fileInput = document.getElementById('fileInput');
 
