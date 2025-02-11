@@ -249,6 +249,7 @@ hr {
     background-blend-mode: lighten;
     -webkit-background-blend-mode: lighten;
     -moz-background-blend-mode: lighten;
+    opacity: 0.99;
 }
 
 #info {
