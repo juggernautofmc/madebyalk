@@ -245,11 +245,10 @@ hr {
     min-height: 900px; 
     background-image: url('../images/form_pattern.png');
     background-size: 50%;
-    background-color: rgba(255,255,255,0.7);
-    background-blend-mode: lighten;
-    -webkit-background-blend-mode: lighten;
-    -moz-background-blend-mode: lighten;
-    opacity: 0.99;
+}
+
+#form::before {
+    opacity: 0.7;
 }
 
 #info {
