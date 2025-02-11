@@ -234,6 +234,7 @@ hr {
     flex-direction: column; 
     justify-content: center; 
     align-items: center;
+    will-change: transform;
 }
 
 #b2 {
@@ -553,6 +554,7 @@ textarea {
     background-blend-mode: lighten;
     -webkit-background-blend-mode: lighten;
     -moz-background-blend-mode: lighten;
+    will-change: transform;
 }
 
 /* ADMIN PAGE */
