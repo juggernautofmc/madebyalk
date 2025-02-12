@@ -10,6 +10,8 @@ app = Flask(__name__)
 # Environment variables
 DATABASE_URL = os.environ.get('DATABASE_URL')
 CAPTCHA_SECRET_KEY = os.environ.get('CAPTCHA_SECRET_KEY')
+SITE_USERNAME = os.environ.get('SITE_USERNAME')
+SITE_PASSWORD = os.environ.get('SITE_PASSWORD')
 DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://")
 
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
@@ -91,7 +93,7 @@ def portfolio():
 @app.route('/admin')
 def admin():
     auth = request.authorization
-    if auth and auth.username == 'msalk.tr' and auth.password == 'Mminecraft9182$#':
+    if auth and auth.username == SITE_USERNAME and auth.password == SITE_PASSWORD:
         customers = Customer.query.all()
         customer_list = []
         for customer in customers:
